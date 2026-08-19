@@ -3,7 +3,6 @@ const siteNav = document.querySelector('.site-nav');
 const navLinks = document.querySelectorAll('.site-nav a');
 const copyEmailButton = document.querySelector('[data-copy-email]');
 const cursorGlow = document.querySelector('.cursor-glow');
-const portalIntro = document.querySelector('[data-portal-intro]');
 const albumButtons = document.querySelectorAll('[data-spotify-id]');
 const albumPlayer = document.querySelector('[data-album-player]');
 const spotifyFrame = document.querySelector('[data-spotify-frame]');
@@ -14,19 +13,6 @@ const spotifyRetryButton = albumPlayer?.querySelector('[data-spotify-retry]');
 const spotifyFallback = albumPlayer?.querySelector('[data-spotify-fallback]');
 
 document.querySelector('#current-year').textContent = new Date().getFullYear();
-
-if (portalIntro) {
-  const removePortal = () => portalIntro.remove();
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    removePortal();
-  } else {
-    portalIntro.addEventListener('animationend', (event) => {
-      if (event.target === portalIntro) removePortal();
-    });
-    window.setTimeout(removePortal, 2600);
-  }
-}
 
 if (menuToggle && siteNav) {
   menuToggle.addEventListener('click', () => {
