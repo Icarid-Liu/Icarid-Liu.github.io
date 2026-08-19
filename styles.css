@@ -25,8 +25,8 @@ body {
   min-width: 320px;
   margin: 0;
   overflow-x: hidden;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.45;
@@ -316,29 +316,7 @@ button {
 
 .hero::before,
 .hero::after {
-  position: absolute;
-  z-index: -1;
-  content: "";
-}
-
-.hero::before {
-  top: 0;
-  right: 0;
-  width: 54%;
-  height: 100%;
-  background:
-    linear-gradient(130deg, rgba(140, 201, 255, 0.12), transparent 55%),
-    repeating-linear-gradient(90deg, transparent 0, transparent 69px, rgba(242, 238, 231, 0.055) 70px),
-    repeating-linear-gradient(0deg, transparent 0, transparent 69px, rgba(242, 238, 231, 0.055) 70px);
-}
-
-.hero::after {
-  right: -10rem;
-  bottom: -14rem;
-  width: 38rem;
-  height: 38rem;
-  border: 1px solid rgba(215, 255, 82, 0.36);
-  border-radius: 50%;
+  display: none;
 }
 
 .hero-copy {
@@ -391,7 +369,7 @@ button {
 
 .crypto-lock-body {
   fill: var(--acid);
-  stroke: var(--acid);
+  stroke: var(--green);
 }
 
 .crypto-keyhole {
@@ -534,13 +512,13 @@ h2 em {
   min-height: 28rem;
   align-self: center;
   flex-direction: column;
-  border: 1px solid rgba(242, 238, 231, 0.25);
-  background: linear-gradient(145deg, rgba(140, 201, 255, 0.13), rgba(255, 133, 159, 0.055) 48%, transparent 75%);
+  border: 1px solid rgba(242, 238, 231, 0.24);
+  background: rgba(242, 238, 231, 0.025);
 }
 
 .hero-research-heading {
   padding: clamp(1rem, 1.8vw, 1.5rem);
-  border-bottom: 1px solid rgba(242, 238, 231, 0.2);
+  border-bottom: 1px solid rgba(242, 238, 231, 0.18);
 }
 
 .hero-research-heading .eyebrow {
@@ -566,7 +544,7 @@ h2 em {
   gap: 1rem;
   align-items: start;
   padding: 0.95rem clamp(1rem, 1.8vw, 1.5rem);
-  border-bottom: 1px solid rgba(242, 238, 231, 0.16);
+  border-bottom: 1px solid rgba(242, 238, 231, 0.14);
   transition: background-color 0.2s ease;
 }
 
@@ -575,7 +553,7 @@ h2 em {
 }
 
 .hero-focus-item:hover {
-  background: rgba(242, 238, 231, 0.055);
+  background: rgba(242, 238, 231, 0.045);
 }
 
 .hero-focus-index {
@@ -607,8 +585,8 @@ h2 em {
   justify-content: space-between;
   gap: 1rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(242, 238, 231, 0.21);
-  color: rgba(242, 238, 231, 0.64);
+  border-top: 1px solid rgba(242, 238, 231, 0.2);
+  color: rgba(242, 238, 231, 0.62);
   font-size: 0.7rem;
 }
 
@@ -633,6 +611,7 @@ h2 {
 }
 
 .work {
+  border-top: 1px solid rgba(242, 238, 231, 0.12);
   color: var(--paper);
   background: var(--ink-soft);
 }
@@ -765,11 +744,13 @@ h2 {
 }
 
 .path {
-  background:
-    linear-gradient(rgba(16, 20, 37, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 20, 37, 0.045) 1px, transparent 1px),
-    var(--paper);
-  background-size: 46px 46px;
+  border-top: 1px solid rgba(242, 238, 231, 0.12);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.path .eyebrow > span:first-child {
+  box-shadow: inset 0 0 0 3px var(--ink);
 }
 
 .path-title {
@@ -779,9 +760,13 @@ h2 {
   gap: 2rem;
 }
 
+#path-title {
+  word-spacing: 0.32em;
+}
+
 .timeline {
   margin-top: clamp(2.8rem, 4vw, 4.2rem);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(242, 238, 231, 0.2);
 }
 
 .timeline-item {
@@ -790,7 +775,7 @@ h2 {
   gap: 1.6rem;
   min-height: 7.2rem;
   padding: 1.05rem 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(242, 238, 231, 0.18);
 }
 
 .timeline-year {
@@ -798,17 +783,17 @@ h2 {
 }
 
 .timeline-year span {
-  color: rgba(16, 20, 37, 0.52);
+  color: rgba(242, 238, 231, 0.5);
 }
 
 .timeline-dot {
   width: 0.7rem;
   height: 0.7rem;
   margin-top: 0.12rem;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--paper);
   border-radius: 50%;
-  background: var(--paper);
-  box-shadow: 0 0 0 4px var(--paper);
+  background: var(--ink);
+  box-shadow: 0 0 0 4px var(--ink);
 }
 
 .timeline-item:first-child .timeline-dot { background: var(--acid); }
@@ -821,7 +806,7 @@ h2 {
 }
 
 .timeline-panic .timeline-year {
-  color: rgba(16, 20, 37, 0.58);
+  color: rgba(242, 238, 231, 0.58);
   font-size: 0.58rem;
 }
 
@@ -829,7 +814,7 @@ h2 {
   width: 0.5rem;
   height: 0.5rem;
   margin-top: 0.16rem;
-  box-shadow: 0 0 0 3px var(--paper);
+  box-shadow: 0 0 0 3px var(--ink);
 }
 
 .timeline-panic .timeline-copy h3 {
@@ -859,7 +844,7 @@ h2 {
 .timeline-copy small {
   display: block;
   margin: 0;
-  color: rgba(16, 20, 37, 0.65);
+  color: rgba(242, 238, 231, 0.64);
   font-size: 0.86rem;
   line-height: 1.55;
 }
@@ -867,16 +852,16 @@ h2 {
 .timeline-copy small { margin-top: 0.48rem; }
 
 .timeline-title-link {
-  border-bottom: 1px solid rgba(16, 20, 37, 0.24);
+  border-bottom: 1px solid rgba(242, 238, 231, 0.28);
 }
 
 .timeline-title-link:hover {
-  border-color: var(--ink);
+  border-color: var(--paper);
 }
 
 .timeline-link {
-  border-bottom: 1px solid rgba(16, 20, 37, 0.32);
-  color: var(--ink);
+  border-bottom: 1px solid rgba(242, 238, 231, 0.34);
+  color: var(--paper);
   font-family: var(--mono);
   font-size: 0.72rem;
   letter-spacing: 0.03em;
@@ -884,7 +869,8 @@ h2 {
 }
 
 .timeline-link:hover {
-  border-color: var(--ink);
+  border-color: var(--acid);
+  color: var(--acid);
 }
 
 .elsewhere {
