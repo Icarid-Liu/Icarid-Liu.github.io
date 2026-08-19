@@ -108,6 +108,10 @@ if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
   window.addEventListener('pointermove', (event) => {
     cursorGlow.style.left = `${event.clientX}px`;
     cursorGlow.style.top = `${event.clientY}px`;
+    cursorGlow.classList.add('is-visible');
+  });
+  window.addEventListener('pointerout', (event) => {
+    if (!event.relatedTarget) cursorGlow.classList.remove('is-visible');
   });
 } else if (cursorGlow) {
   cursorGlow.style.display = 'none';

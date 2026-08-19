@@ -22,14 +22,25 @@ html {
 }
 
 body {
+  position: relative;
+  isolation: isolate;
   min-width: 320px;
   margin: 0;
   overflow-x: hidden;
-  background: var(--ink);
+  background:
+    radial-gradient(circle at 82% 12%, rgba(140, 201, 255, 0.1), transparent 34rem),
+    radial-gradient(circle at 16% 72%, rgba(255, 133, 159, 0.075), transparent 40rem),
+    linear-gradient(145deg, #101425 0%, #14192d 54%, #20172b 100%);
+  background-attachment: fixed;
   color: var(--paper);
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.45;
+}
+
+main {
+  position: relative;
+  z-index: 1;
 }
 
 .portal-intro {
@@ -141,14 +152,23 @@ button {
 
 .cursor-glow {
   position: fixed;
-  z-index: -1;
-  width: 22rem;
-  height: 22rem;
+  z-index: 0;
+  width: 32rem;
+  height: 32rem;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(215, 255, 82, 0.1), transparent 66%);
+  opacity: 0;
+  background:
+    radial-gradient(circle, rgba(140, 201, 255, 0.15) 0, rgba(215, 255, 82, 0.085) 28%, transparent 68%);
+  filter: blur(0.18rem);
+  mix-blend-mode: screen;
   transform: translate(-50%, -50%);
   transition: opacity 0.2s ease;
+  will-change: left, top, opacity;
+}
+
+.cursor-glow.is-visible {
+  opacity: 1;
 }
 
 .section-shell {
@@ -311,7 +331,7 @@ button {
   padding-bottom: 1.5rem;
   isolation: isolate;
   color: var(--paper);
-  background: var(--ink);
+  background: transparent;
 }
 
 .hero::before,
@@ -611,13 +631,13 @@ h2 {
 }
 
 .work {
-  border-top: 1px solid rgba(242, 238, 231, 0.12);
+  border-top: 0;
   color: var(--paper);
-  background: var(--ink-soft);
+  background: transparent;
 }
 
 .work .eyebrow > span:first-child {
-  box-shadow: inset 0 0 0 3px var(--ink-soft);
+  box-shadow: inset 0 0 0 3px var(--ink);
 }
 
 .work-header {
@@ -744,9 +764,9 @@ h2 {
 }
 
 .path {
-  border-top: 1px solid rgba(242, 238, 231, 0.12);
+  border-top: 0;
   color: var(--paper);
-  background: var(--ink);
+  background: transparent;
 }
 
 .path .eyebrow > span:first-child {
@@ -819,9 +839,12 @@ h2 {
 
 .timeline-panic .timeline-copy h3 {
   margin-bottom: 0.24rem;
-  font-size: clamp(0.92rem, 1.15vw, 1.08rem);
-  font-weight: 500;
-  letter-spacing: -0.025em;
+  font-family: var(--serif);
+  font-size: clamp(1.04rem, 1.25vw, 1.22rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.05;
 }
 
 .timeline-panic .timeline-copy p,
@@ -877,11 +900,11 @@ h2 {
   padding-top: clamp(3.2rem, 4.5vw, 4.5rem);
   padding-bottom: clamp(3.2rem, 4.5vw, 4.5rem);
   color: var(--paper);
-  background: #271a35;
+  background: transparent;
 }
 
 .elsewhere .eyebrow > span:first-child {
-  box-shadow: inset 0 0 0 3px #271a35;
+  box-shadow: inset 0 0 0 3px var(--ink);
   background: var(--pink);
 }
 
