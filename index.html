@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Yijian Liu — PhD candidate working on lattice-based cryptography and post-quantum security."
+    />
+    <meta name="theme-color" content="#101425" />
+    <title>Yijian Liu — Lattice Cryptography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="portal-intro" data-portal-intro aria-hidden="true">
+      <div class="portal-vortex">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <header class="site-header" id="top">
+      <a class="site-mark" href="#top" aria-label="Yijian Liu home">
+        <span class="mark-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>YL</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">Open navigation</span>
+        <span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="#research">Research</a>
+        <a href="#work">Selected work</a>
+        <a href="#elsewhere">Soundness</a>
+        <a class="nav-contact" href="#contact">Email <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero section-shell" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow hero-tags">
+            <span></span>
+            <span class="hero-tag">
+              Cryptography
+              <svg class="hero-tag-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <rect class="crypto-lock-body" x="3.5" y="7" width="9" height="6" rx="1"></rect>
+                <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"></path>
+                <circle class="crypto-keyhole" cx="8" cy="10" r="0.7"></circle>
+              </svg>
+            </span>
+            <span class="hero-tag-separator" aria-hidden="true">/</span>
+            <span class="hero-tag">
+              Britpop
+              <svg class="hero-tag-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <circle cx="8" cy="8" r="5.25"></circle>
+                <circle class="vinyl-label" cx="8" cy="8" r="1.65"></circle>
+                <circle class="vinyl-hole" cx="8" cy="8" r="0.35"></circle>
+                <path d="M4.5 5.1a4.1 4.1 0 0 1 2-1"></path>
+              </svg>
+            </span>
+            <span class="hero-tag-separator" aria-hidden="true">/</span>
+            <span class="hero-tag">
+              Football
+              <span class="hero-tag-glyph" aria-hidden="true">⚽</span>
+            </span>
+            <span class="hero-tag-separator" aria-hidden="true">/</span>
+            <span class="hero-tag">
+              Snooker
+              <svg class="hero-tag-icon snooker-rack-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M8 1.5 14 12H2L8 1.5Z"></path>
+                <circle class="snooker-ball" cx="8" cy="4.1" r="1.05"></circle>
+                <circle class="snooker-ball" cx="6.25" cy="7.1" r="1.05"></circle>
+                <circle class="snooker-ball" cx="9.75" cy="7.1" r="1.05"></circle>
+                <circle class="snooker-ball" cx="4.5" cy="10.1" r="1.05"></circle>
+                <circle class="snooker-ball" cx="8" cy="10.1" r="1.05"></circle>
+                <circle class="snooker-ball" cx="11.5" cy="10.1" r="1.05"></circle>
+              </svg>
+            </span>
+            <span class="hero-tag-separator" aria-hidden="true">/</span>
+            <span class="hero-tag">
+              Whisky
+              <svg class="hero-tag-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <path class="whisky-liquid" d="M4 8.5h8l-.45 4h-7.1L4 8.5Z"></path>
+                <path d="M3 3.5h10l-1 9H4l-1-9Z"></path>
+                <path d="M4 8.5h8"></path>
+              </svg>
+            </span>
+          </p>
+          <h1 id="hero-title">
+            <span class="name-line">Yijian<small class="name-cn" lang="zh-CN">易简</small></span><br />
+            <span class="name-line">Liu<small class="name-cn" lang="zh-CN">刘</small></span>
+          </h1>
+          <p class="hero-intro">PhD candidate in lattice cryptography.</p>
+          <div class="hero-actions">
+            <a class="text-link" href="mailto:icarid.liu@gmail.com">icarid.liu@gmail.com <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <div class="hero-research reveal" id="research" aria-labelledby="research-title">
+          <div class="hero-research-heading">
+            <p class="eyebrow"><span></span> 01 / Research</p>
+            <h2 id="research-title">Research Interests.</h2>
+          </div>
+          <div class="hero-focus-list">
+            <article class="hero-focus-item">
+              <p class="hero-focus-index">(01)</p>
+              <div>
+                <h3>Look from above</h3>
+                <p>Step back to see the whole design space: first principles, comparable trade-offs, and the best design points.</p>
+              </div>
+            </article>
+            <article class="hero-focus-item">
+              <p class="hero-focus-index">(02)</p>
+              <div>
+                <h3>Exploit all the things</h3>
+                <p>Use every geometric and algebraic structure — for efficient constructions and for stronger attacks.</p>
+              </div>
+            </article>
+            <article class="hero-focus-item">
+              <p class="hero-focus-index">(03)</p>
+              <div>
+                <h3>Keep pace with the times</h3>
+                <p>Bring AI into cryptographic discovery, while using cryptography to protect intelligent systems.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-foot reveal">
+          <p>Institute of Information Engineering, CAS</p>
+          <a href="https://lord-riot.github.io/" target="_blank" rel="noreferrer">
+            Retired CTFer <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="work section-shell section-padding" id="work" aria-labelledby="work-title">
+        <div class="work-header reveal">
+          <div class="section-heading compact">
+            <p class="eyebrow"><span></span> 02 / Selected work</p>
+            <h2 id="work-title">Publications</h2>
+          </div>
+        </div>
+
+        <div class="publication-list">
+          <a
+            class="publication featured reveal"
+            href="https://eprint.iacr.org/2026/1715"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <p class="publication-number">01</p>
+            <div class="publication-main">
+              <p class="publication-venue">Asiacrypt 2026</p>
+              <h3>How Compact Can NTRU Encryption Be?</h3>
+              <p>Heuristic frontiers and practical schemes.</p>
+            </div>
+            <p class="publication-authors">Yijian Liu · Yu Zhang · Xianhui Lu · Yao Cheng · Yongjian Yin</p>
+            <span class="publication-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a
+            class="publication reveal"
+            href="https://arxiv.org/abs/2507.09580"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <p class="publication-number">02</p>
+            <div class="publication-main">
+              <p class="publication-venue">ICML 2026</p>
+              <h3>AICrypto</h3>
+              <p>Evaluating cryptography capabilities of large language models.</p>
+            </div>
+            <p class="publication-authors">
+              Yu Wang* · Yijian Liu* · Liheng Ji* · Han Luo* · Wenjie Li* · Xiaofei Zhou · Chiyun Feng · Puji Wang ·
+              Yuhan Cao · Geyuan Zhang · Xiaojian Li · Rongwu Xu · Yilei Chen · Tianxing He
+            </p>
+            <span class="publication-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a
+            class="publication reveal"
+            href="https://eprint.iacr.org/2026/303"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <p class="publication-number">03</p>
+            <div class="publication-main">
+              <p class="publication-venue">Eurocrypt 2026</p>
+              <h3>TalonG</h3>
+              <p>Bandwidth-efficient two-round threshold signatures from lattices.</p>
+            </div>
+            <p class="publication-authors">
+              Liming Gao · Guofeng Tang · Dingding Jia · Yijian Liu · Bingqian Liu · Xianhui Lu · Kunpeng Wang ·
+              Yongjian Yin
+            </p>
+            <span class="publication-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a
+            class="publication reveal"
+            href="https://eprint.iacr.org/2025/2304"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <p class="publication-number">04</p>
+            <div class="publication-main">
+              <p class="publication-venue">USENIX Security 2026</p>
+              <h3>Streaming Function Secret Sharing</h3>
+              <p>And its applications.</p>
+            </div>
+            <p class="publication-authors">
+              Xiangfu Song · Jianli Bai · Ye Dong · Yijian Liu · Yu Zhang · Xianhui Lu · Tianwei Zhang
+            </p>
+            <span class="publication-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a
+            class="publication reveal"
+            href="https://eprint.iacr.org/2025/1520"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <p class="publication-number">05</p>
+            <div class="publication-main">
+              <p class="publication-venue">Asiacrypt 2025</p>
+              <h3>DAWN</h3>
+              <p>Smaller and faster NTRU encryption via double encoding.</p>
+            </div>
+            <p class="publication-authors">Yijian Liu · Yu Zhang · Xianhui Lu · Yao Cheng · Yongjian Yin</p>
+            <span class="publication-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="work-foot reveal">
+          <details class="paper-notes">
+            <summary>More in the record <span aria-hidden="true">+</span></summary>
+            <div>
+              <p><strong>FSE 2025:</strong> LEAP: High-Performance Lattice-Based Pseudorandom Number Generator.</p>
+              <p><strong>ACISP 2025:</strong> Fiat-Shamir with Rejection and Rotation; Refined Error Management for Gate Bootstrapping.</p>
+              <p><strong>AsiaCCS 2024:</strong> Physical-Layer Public Key Encryption Through Massive MIMO.</p>
+              <p><strong>DCC 2023:</strong> An improved method for predicting truncated multiple recursive generators with unknown parameters.</p>
+              <p><strong>ePrint:</strong> Thorns in Polynomial Convolution; A Primer on Dependency in Polynomial Product; Bootstrapping over Free R-Module.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="path section-shell section-padding" aria-labelledby="path-title">
+        <div class="path-title reveal">
+          <p class="eyebrow"><span></span> 03 / Path so far</p>
+          <h2 id="path-title">A few waypoints.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <p class="timeline-year">2022 <span>— now</span></p>
+            <div class="timeline-dot"></div>
+            <div class="timeline-copy">
+              <h3>PhD Candidate, Lattice-based Cryptography</h3>
+              <p>Institute of Information Engineering, Chinese Academy of Sciences · Advisor: Xianhui Lu</p>
+            </div>
+          </article>
+          <article class="timeline-item timeline-panic reveal">
+            <p class="timeline-year">2024</p>
+            <div class="timeline-dot"></div>
+            <div class="timeline-copy">
+              <h3>
+                <a class="timeline-title-link" href="https://eprint.iacr.org/2024/555" target="_blank" rel="noreferrer">
+                  Quantum Algorithms for Lattice Problems <span aria-hidden="true">↗</span>
+                </a>
+              </h3>
+              <p>Yilei Chen · Cryptology ePrint Archive 2024/555</p>
+              <small>
+                My real research journey began with this panic — a first lesson in why
+                <a
+                  class="timeline-link"
+                  href="http://www.chenyilei.net/cryptographers-seldom-sleep-well.html"
+                  target="_blank"
+                  rel="noreferrer"
+                >cryptographers seldom sleep well</a>.
+              </small>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <p class="timeline-year">2021 <span>— 2022</span></p>
+            <div class="timeline-dot"></div>
+            <div class="timeline-copy">
+              <h3>Research Intern, Privacy Computing</h3>
+              <p>Alibaba Gemini Lab (now CP Lab, Ant Research) · Mentor: Cheng Hong</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <p class="timeline-year">2018 <span>— 2022</span></p>
+            <div class="timeline-dot"></div>
+            <div class="timeline-copy">
+              <h3>B.Eng., Information Security</h3>
+              <p>Beijing University of Posts and Telecommunications · Mentor: Jingguo Bi</p>
+              <small>
+                <a class="timeline-link" href="https://lord-riot.github.io/" target="_blank" rel="noreferrer">Retired CTFer</a>
+                — DEF CON 3rd (2021), 4th (2022); HITCON 3rd (2021, 2022).
+              </small>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="elsewhere section-shell section-padding" id="elsewhere" aria-labelledby="elsewhere-title">
+        <div class="elsewhere-heading reveal">
+          <p class="eyebrow"><span></span> 04 / Soundness</p>
+          <h2 id="elsewhere-title">Soundness,<br /><em>on record.</em></h2>
+          <div class="sound-side">
+            <p>Proofs ask for soundness; the hours after ask for sound.</p>
+            <div class="album-player" data-album-player>
+              <div class="player-caption">
+                <p data-player-title>Bloodletting — Concrete Blonde</p>
+                <a
+                  data-player-link
+                  href="https://open.spotify.com/album/0Qny7PmxUlBMrw4xdeiHaU"
+                  target="_blank"
+                  rel="noreferrer"
+                >Spotify ↗</a>
+              </div>
+              <iframe
+                data-spotify-frame
+                data-album-id="0Qny7PmxUlBMrw4xdeiHaU"
+                title="Spotify album player: Bloodletting — Concrete Blonde"
+                src="https://open.spotify.com/embed/album/0Qny7PmxUlBMrw4xdeiHaU?utm_source=generator&amp;theme=0"
+                width="100%"
+                height="152"
+                frameborder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                allowfullscreen
+                loading="eager"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="record-shelf reveal" aria-label="A short record shelf">
+          <article class="shelf-album is-active">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="0Qny7PmxUlBMrw4xdeiHaU"
+              data-player-title="Bloodletting — Concrete Blonde"
+              aria-label="Play Bloodletting by Concrete Blonde here"
+              aria-pressed="true"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-red" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e028cdaba8fdcd659d7f18a1630"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Concrete Blonde</p>
+              <h3>Bloodletting</h3>
+              <a href="https://open.spotify.com/album/0Qny7PmxUlBMrw4xdeiHaU" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="0ETFjACtuP2ADo6LFhL6HN"
+              data-player-title="Abbey Road — The Beatles"
+              aria-label="Play Abbey Road by The Beatles here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-blue" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02dc30583ba717007b00cceb25"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">The Beatles</p>
+              <h3>Abbey Road</h3>
+              <a href="https://open.spotify.com/album/0ETFjACtuP2ADo6LFhL6HN" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="3ly9T2L4pqTZijFgQssd3x"
+              data-player-title="Different Class — Pulp"
+              aria-label="Play Different Class by Pulp here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-pulp" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02fd952bece8f049dbcd7df93f"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Pulp</p>
+              <h3>Different Class</h3>
+              <a href="https://open.spotify.com/album/3ly9T2L4pqTZijFgQssd3x" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="7K6hD7MzIMG4OyDvWvCoci"
+              data-player-title="Darklands — The Jesus and Mary Chain"
+              aria-label="Play Darklands by The Jesus and Mary Chain here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-dark" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02feb06b0236485b87e025e51f"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">The Jesus and Mary Chain</p>
+              <h3>Darklands</h3>
+              <a href="https://open.spotify.com/album/7K6hD7MzIMG4OyDvWvCoci" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="2LQYvrh5jOxAAZjiBX3f2b"
+              data-player-title="Man of Words / Man of Music — David Bowie"
+              aria-label="Play Man of Words / Man of Music by David Bowie here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-gold" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://images.squarespace-cdn.com/content/v1/5a70fa14e45a7c7dd2fadad0/1519497173710-PXUY3JHRWPHINW9RTVUD/1969_manofwords.jpg"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">David Bowie</p>
+              <h3>Man of Words / Man of Music</h3>
+              <a href="https://open.spotify.com/album/2LQYvrh5jOxAAZjiBX3f2b" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="1OAMyQGaooBR0qjxDEjG4t"
+              data-player-title="Hail to the Thief — Radiohead"
+              aria-label="Play Hail to the Thief by Radiohead here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-radiohead" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e024a1fd90fcfbc6fb0cd21637d"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Radiohead</p>
+              <h3>Hail to the Thief</h3>
+              <a href="https://open.spotify.com/album/1OAMyQGaooBR0qjxDEjG4t" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="2cUpAOlQjV5uSjkWj5bEQY"
+              data-player-title="Atom Heart Mother — Pink Floyd"
+              aria-label="Play Atom Heart Mother by Pink Floyd here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-floyd" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02606fd1bee21c7863689e0487"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Pink Floyd</p>
+              <h3>Atom Heart Mother</h3>
+              <a href="https://open.spotify.com/album/2cUpAOlQjV5uSjkWj5bEQY" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="0LSYGjqzhWlvje8yFV0fAE"
+              data-player-title="Ultraviolence — Lana Del Rey"
+              aria-label="Play Ultraviolence by Lana Del Rey here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-ultraviolence" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e020ffb64b6e586abf6ca6aded2"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Lana Del Rey</p>
+              <h3>Ultraviolence</h3>
+              <a href="https://open.spotify.com/album/0LSYGjqzhWlvje8yFV0fAE" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="34hQFIwGTLf03BZQmGL0iy"
+              data-player-title="I Do Not Want What I Haven’t Got — Sinéad O’Connor"
+              aria-label="Play I Do Not Want What I Haven’t Got by Sinéad O’Connor here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-sinead" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e026f6536c2e326fb2b42db90f8"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Sinéad O’Connor</p>
+              <h3>I Do Not Want What I Haven’t Got</h3>
+              <a href="https://open.spotify.com/album/34hQFIwGTLf03BZQmGL0iy" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="0F3cJunZrWe2z4eT5uWDI1"
+              data-player-title="You Really Got Me — The Very Best Of — The Kinks"
+              aria-label="Play You Really Got Me — The Very Best Of by The Kinks here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-kinks" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://coverartarchive.org/release/f4cf3558-d56c-46a9-a972-b852651d2233/6699157371-500.jpg"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">The Kinks</p>
+              <h3>You Really Got Me — The Very Best Of</h3>
+              <a href="https://open.spotify.com/album/0F3cJunZrWe2z4eT5uWDI1" target="_blank" rel="noreferrer">
+                Closest Spotify edition <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="2X0L9mwLuMqAK8rf965Vmi"
+              data-player-title="Coming from Reality — Rodríguez"
+              aria-label="Play Coming from Reality by Rodríguez here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-rodriguez" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0286146e2f7fc9e43db86dc66f"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Rodríguez</p>
+              <h3>Coming from Reality</h3>
+              <a href="https://open.spotify.com/album/2X0L9mwLuMqAK8rf965Vmi" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="1jWmEhn3ggaL6isoyLfwBn"
+              data-player-title="The Doors — The Doors"
+              aria-label="Play The Doors by The Doors here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-doors" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0200d037dd3dfb578da4692088"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">The Doors</p>
+              <h3>The Doors</h3>
+              <a href="https://open.spotify.com/album/1jWmEhn3ggaL6isoyLfwBn" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="0nSzBICzQHea8grwfqa5Gb"
+              data-player-title="The Magic Whip — Blur"
+              aria-label="Play The Magic Whip by Blur here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-blur" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e029dd4e688b220635941abfad4"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Blur</p>
+              <h3>The Magic Whip</h3>
+              <a href="https://open.spotify.com/album/0nSzBICzQHea8grwfqa5Gb" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="4BOaL1TOarypViTKNrcP8d"
+              data-player-title="Loaded — The Velvet Underground"
+              aria-label="Play Loaded by The Velvet Underground here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-loaded" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02d032cf28ec935aca81d2b3d0"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">The Velvet Underground</p>
+              <h3>Loaded</h3>
+              <a href="https://open.spotify.com/album/4BOaL1TOarypViTKNrcP8d" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="3Ob212LZm9owwmTJbDnqL4"
+              data-player-title="Horses — Patti Smith"
+              aria-label="Play Horses by Patti Smith here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-horses" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02b0c9e372ad6871a2460fc739"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Patti Smith</p>
+              <h3>Horses</h3>
+              <a href="https://open.spotify.com/album/3Ob212LZm9owwmTJbDnqL4" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+
+      </section>
+
+      <section class="contact section-shell" id="contact" aria-label="Contact">
+        <div class="contact-copy reveal">
+          <p class="contact-note">
+            I’m happy to discuss anything interesting in cryptography, especially lattice-based cryptography.
+          </p>
+          <div class="contact-actions">
+            <a class="email-link" href="mailto:icarid.liu@gmail.com">icarid.liu@gmail.com <span aria-hidden="true">↗</span></a>
+            <button class="copy-email" type="button" data-copy-email="icarid.liu@gmail.com">Copy email</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer section-shell">
+      <p>© <span id="current-year"></span> Yijian Liu</p>
+      <div class="footer-eggs" aria-label="Small sporting Easter eggs">
+        <span class="easter-egg city-egg" tabindex="0" aria-label="Manchester City, 93 minutes 20 seconds">
+          <svg class="egg-icon city-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <circle cx="16" cy="16" r="14.5" fill="#6cabdd" stroke="#f2eee7" />
+            <circle cx="16" cy="16" r="10.5" fill="#fff" stroke="#00285e" stroke-width="1.2" />
+            <path d="M9.5 15.1h13l-2.2 2.4h-8.6z" fill="#d9a441" stroke="#00285e" stroke-width="0.8" />
+            <path d="M13 9.1v5M13.2 9.6l7.2 3.5h-7.2z" fill="#f2eee7" stroke="#00285e" stroke-width="0.8" />
+            <path d="M16 19.1l1 1.4 1.7-0.2-0.7 1.6 0.7 1.5-1.7-0.2-1 1.4-1-1.4-1.7 0.2 0.7-1.5-0.7-1.6 1.7 0.2z" fill="#d71920" />
+          </svg>
+          <span>93:20</span>
+          <span class="egg-note">Blue moon.</span>
+        </span>
+        <span class="easter-egg snooker-egg" tabindex="0" aria-label="Snooker maximum break, 147">
+          <span>147</span>
+          <svg class="egg-icon crucible-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 19V8.5L6.5 5h11L21 8.5V19M2 19h20M7 19v-5.5a5 5 0 0 1 10 0V19" />
+            <path d="M8 9h8" />
+          </svg>
+          <span class="egg-note">The Crucible.</span>
+        </span>
+      </div>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
