@@ -1250,11 +1250,6 @@ h2 {
   line-height: 1.18;
 }
 
-.contact-contraction {
-  display: inline-block;
-  letter-spacing: -0.085em;
-}
-
 .contact .contact-actions { justify-content: flex-end; }
 
 .email-link {
