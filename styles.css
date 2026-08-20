@@ -1057,6 +1057,11 @@ h2 {
 .disc-blur { --record-label: #62d7bd; }
 .disc-loaded { --record-label: #dc7796; }
 .disc-horses { --record-label: #d8d3ca; }
+.disc-suede { --record-label: #b86751; }
+.disc-pixies { --record-label: #d67043; }
+.disc-nirvana { --record-label: #d6a094; }
+.disc-smiths { --record-label: #718e80; }
+.disc-stone-roses { --record-label: #d8b735; }
 
 .album-cover {
   position: absolute;
