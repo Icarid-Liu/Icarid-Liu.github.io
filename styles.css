@@ -1220,7 +1220,7 @@ h2 {
 }
 
 .site-footer p { margin: 0; }
-.site-footer a { color: var(--acid); }
+.site-footer > a { color: var(--acid); }
 
 .footer-eggs {
   display: flex;
@@ -1240,7 +1240,7 @@ h2 {
   border: 1px solid rgba(242, 238, 231, 0.2);
   border-radius: 999px;
   color: rgba(242, 238, 231, 0.56);
-  cursor: default;
+  cursor: pointer;
   outline: none;
   transition: border-color 0.2s ease, color 0.2s ease;
 }
