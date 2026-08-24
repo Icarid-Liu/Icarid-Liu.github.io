@@ -207,6 +207,11 @@ button {
   opacity: 1;
 }
 
+.site-nav > a[aria-current="page"] {
+  color: var(--acid);
+  opacity: 1;
+}
+
 .nav-contact {
   padding: 0.63rem 0.85rem;
   border: 1px solid rgba(242, 238, 231, 0.55);
@@ -281,6 +286,27 @@ button {
   align-items: center;
   gap: 0.25rem;
   white-space: nowrap;
+}
+
+.hero-tag-link {
+  display: inline-flex;
+  width: 1.15rem;
+  height: 1.15rem;
+  align-items: center;
+  justify-content: center;
+  margin: -0.18rem;
+  border-radius: 50%;
+  transition: color 0.2s ease, transform 0.25s ease;
+}
+
+.hero-tag-link:hover {
+  color: var(--pink);
+  transform: rotate(32deg);
+}
+
+.hero-tag-link:focus-visible {
+  outline: 1px solid var(--acid);
+  outline-offset: 1px;
 }
 
 .hero-tag-separator {
@@ -830,6 +856,11 @@ h2 {
   background: transparent;
 }
 
+.soundness-standalone {
+  min-height: calc(100vh - 4.5rem);
+  padding-top: clamp(7.2rem, 9vw, 9rem);
+}
+
 .elsewhere .eyebrow > span:first-child {
   box-shadow: inset 0 0 0 3px var(--ink);
   background: var(--pink);
@@ -1315,6 +1346,8 @@ h2 {
 
 @media (max-width: 860px) {
   .site-header { padding-top: 1.2rem; }
+
+  .soundness-standalone { padding-top: 6.4rem; }
 
   .menu-toggle { display: block; position: relative; z-index: 3; }
 
