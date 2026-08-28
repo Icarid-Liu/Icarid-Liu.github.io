@@ -107,7 +107,7 @@ html.portal-arrival .portal-transition {
 }
 
 .portal-transition.is-departing {
-  animation: portal-backdrop-in 0.94s cubic-bezier(.52, 0, .78, .36) forwards;
+  animation: portal-backdrop-in 1.76s cubic-bezier(.52, 0, .78, .36) forwards;
 }
 
 .portal-canvas {
@@ -126,7 +126,7 @@ body.portal-traveling {
 }
 
 @keyframes portal-backdrop-in {
-  0%, 56% { background-color: rgba(1, 7, 4, 0); }
+  0%, 74% { background-color: rgba(1, 7, 4, 0); }
   100% { background-color: #010704; }
 }
 

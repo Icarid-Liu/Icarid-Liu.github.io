@@ -15,6 +15,11 @@ const playerLink = albumPlayer?.querySelector('[data-player-link]');
 const spotifyStatusText = albumPlayer?.querySelector('[data-spotify-status-text]');
 const spotifyRetryButton = albumPlayer?.querySelector('[data-spotify-retry]');
 const spotifyFallback = albumPlayer?.querySelector('[data-spotify-fallback]');
+const portalRevealDuration = 300;
+const portalHoldDuration = 1000;
+const portalExpansionDuration = 460;
+const portalOpeningDuration = portalRevealDuration + portalHoldDuration + portalExpansionDuration;
+const portalArrivalDuration = 820;
 
 document.querySelector('#current-year').textContent = new Date().getFullYear();
 
@@ -327,8 +332,9 @@ const createPortalRenderer = (canvas) => {
     if (!animationStartTime) animationStartTime = timestamp;
     resizeCanvas();
 
-    const duration = animationMode === 'opening' ? 960 : 820;
-    const progress = clamp((timestamp - animationStartTime) / duration, 0, 1);
+    const elapsedMilliseconds = timestamp - animationStartTime;
+    const duration = animationMode === 'opening' ? portalOpeningDuration : portalArrivalDuration;
+    const progress = clamp(elapsedMilliseconds / duration, 0, 1);
     const elapsedSeconds = timestamp / 1000;
     const screenCenterHorizontal = viewportWidth / 2;
     const screenCenterVertical = viewportHeight / 2;
@@ -342,17 +348,23 @@ const createPortalRenderer = (canvas) => {
     let opacity = 1;
 
     if (animationMode === 'opening') {
-      const centerProgress = easeOutCubic(clamp(progress / 0.48, 0, 1));
-      centerHorizontal = interpolate(originHorizontal, screenCenterHorizontal, centerProgress);
-      centerVertical = interpolate(originVertical, screenCenterVertical, centerProgress);
-
-      if (progress < 0.56) {
-        radius = interpolate(5, showcaseRadius, easeOutCubic(progress / 0.56));
+      if (elapsedMilliseconds < portalRevealDuration) {
+        const revealProgress = clamp(elapsedMilliseconds / portalRevealDuration, 0, 1);
+        const centerProgress = easeOutCubic(revealProgress);
+        centerHorizontal = interpolate(originHorizontal, screenCenterHorizontal, centerProgress);
+        centerVertical = interpolate(originVertical, screenCenterVertical, centerProgress);
+        radius = interpolate(5, showcaseRadius, easeOutCubic(revealProgress));
+        opacity = clamp(revealProgress / 0.2, 0, 1);
+      } else if (elapsedMilliseconds < portalRevealDuration + portalHoldDuration) {
+        radius = showcaseRadius * (1 + Math.sin(elapsedSeconds * 3.6) * 0.012);
       } else {
-        radius = interpolate(showcaseRadius, coverRadius, easeInCubic((progress - 0.56) / 0.44));
+        const expansionProgress = clamp(
+          (elapsedMilliseconds - portalRevealDuration - portalHoldDuration) / portalExpansionDuration,
+          0,
+          1,
+        );
+        radius = interpolate(showcaseRadius, coverRadius, easeInCubic(expansionProgress));
       }
-
-      opacity = clamp(progress / 0.08, 0, 1);
     } else if (progress < 0.44) {
       radius = interpolate(coverRadius, showcaseRadius, easeOutCubic(progress / 0.44));
     } else {
@@ -418,7 +430,7 @@ if (portalTransition) {
     portalNavigating = false;
 
     try {
-      window.sessionStorage.removeItem('soundness-portal');
+      window.sessionStorage.removeItem('page-portal');
     } catch {}
   };
 
@@ -427,7 +439,7 @@ if (portalTransition) {
       clearPortalArrival();
     } else {
       portalRenderer?.start('closing', window.innerWidth / 2, window.innerHeight / 2);
-      window.setTimeout(clearPortalArrival, 860);
+      window.setTimeout(clearPortalArrival, portalArrivalDuration + 40);
     }
   }
 
@@ -457,10 +469,10 @@ if (portalTransition) {
         );
 
         try {
-          window.sessionStorage.setItem('soundness-portal', '1');
+          window.sessionStorage.setItem('page-portal', '1');
         } catch {}
 
-        window.setTimeout(() => window.location.assign(link.href), 940);
+        window.setTimeout(() => window.location.assign(link.href), portalOpeningDuration + 30);
       });
     });
   }

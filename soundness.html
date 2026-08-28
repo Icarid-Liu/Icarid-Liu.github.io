@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://icarid-liu.me/soundness.html" />
     <script>
       try {
-        if (window.sessionStorage.getItem('soundness-portal') === '1') {
+        if (window.sessionStorage.getItem('page-portal') === '1') {
           document.documentElement.classList.add('portal-arrival');
         }
       } catch {}
@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260828-portal" />
+    <link rel="stylesheet" href="styles.css?v=20260828-portal2" />
   </head>
   <body class="soundness-page">
     <div class="page-noise" aria-hidden="true"></div>
@@ -51,7 +51,7 @@
     </div>
 
     <header class="site-header" id="top">
-      <a class="site-mark" href="index.html" aria-label="Yijian Liu academic homepage">
+      <a class="site-mark" href="index.html" data-portal-link aria-label="Yijian Liu academic homepage">
         <span class="mark-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <span>YL</span>
       </a>
@@ -62,10 +62,10 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-        <a href="index.html#research">Research</a>
-        <a href="index.html#work">Selected work</a>
+        <a href="index.html#research" data-portal-link>Research</a>
+        <a href="index.html#work" data-portal-link>Selected work</a>
         <a href="soundness.html" aria-current="page">Soundness</a>
-        <a class="nav-contact" href="index.html#contact">Email <span aria-hidden="true">↗</span></a>
+        <a class="nav-contact" href="index.html#contact" data-portal-link>Email <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
 
@@ -848,10 +848,10 @@
 
     <footer class="site-footer section-shell">
       <p>© <span id="current-year"></span> Yijian Liu</p>
-      <a href="index.html">Academic homepage <span aria-hidden="true">↖</span></a>
+      <a href="index.html" data-portal-link>Academic homepage <span aria-hidden="true">↖</span></a>
       <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
     </footer>
 
-    <script src="script.js?v=20260828-portal"></script>
+    <script src="script.js?v=20260828-portal2"></script>
   </body>
 </html>
