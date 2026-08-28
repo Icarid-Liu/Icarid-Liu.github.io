@@ -88,6 +88,114 @@ button {
   opacity: 1;
 }
 
+.portal-transition {
+  --portal-x: 50vw;
+  --portal-y: 50vh;
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(2, 8, 7, 0);
+  pointer-events: none;
+}
+
+.portal-transition.is-departing,
+html.portal-arrival .portal-transition {
+  visibility: visible;
+  opacity: 1;
+}
+
+.portal-transition.is-departing {
+  animation: portal-backdrop-in 0.7s ease-in forwards;
+}
+
+.portal-vortex {
+  position: absolute;
+  top: var(--portal-y);
+  left: var(--portal-x);
+  width: clamp(7rem, 18vmin, 12rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    conic-gradient(from 18deg, #d7ff52, #20f17d 10%, #087d4e 19%, #b8ff3f 30%, #16db71 42%, #064e38 54%, #d7ff52 67%, #25ef87 82%, #087d4e 92%, #d7ff52);
+  box-shadow:
+    0 0 1.2rem rgba(215, 255, 82, 0.95),
+    0 0 4rem rgba(32, 241, 125, 0.72),
+    0 0 8rem rgba(8, 125, 78, 0.48);
+  transform: translate(-50%, -50%) scale(0.03);
+  will-change: transform;
+}
+
+.portal-vortex::before,
+.portal-vortex::after {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
+}
+
+.portal-vortex::before {
+  inset: 6%;
+  background:
+    repeating-conic-gradient(from 0deg, rgba(215, 255, 82, 0.95) 0 5deg, rgba(8, 125, 78, 0.2) 7deg 13deg),
+    radial-gradient(circle, rgba(24, 255, 132, 0.82), rgba(3, 53, 37, 0.88) 67%);
+  filter: blur(1.5px);
+  animation: portal-spin 0.34s linear infinite;
+}
+
+.portal-vortex::after {
+  inset: 23%;
+  background:
+    radial-gradient(circle at 42% 36%, rgba(77, 255, 151, 0.26), transparent 27%),
+    radial-gradient(circle, #07271c 0 20%, #020807 72%);
+  box-shadow: inset 0 0 1.8rem rgba(0, 0, 0, 0.92);
+}
+
+.portal-transition.is-departing .portal-vortex {
+  animation: portal-open 0.7s cubic-bezier(.2, .72, .18, 1) forwards;
+}
+
+html.portal-arrival .portal-transition {
+  background-color: #020807;
+  animation: portal-backdrop-out 0.68s ease-out forwards;
+}
+
+html.portal-arrival .portal-vortex {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(16);
+  animation: portal-close 0.68s cubic-bezier(.55, .05, .78, .38) forwards;
+}
+
+body.portal-traveling {
+  overflow: hidden;
+}
+
+@keyframes portal-spin {
+  to { transform: rotate(1turn); }
+}
+
+@keyframes portal-open {
+  0% { transform: translate(-50%, -50%) scale(0.03) rotate(-18deg); }
+  42% { transform: translate(-50%, -50%) scale(1) rotate(32deg); }
+  100% { transform: translate(-50%, -50%) scale(16) rotate(115deg); }
+}
+
+@keyframes portal-close {
+  0% { transform: translate(-50%, -50%) scale(16) rotate(115deg); }
+  62% { transform: translate(-50%, -50%) scale(1) rotate(28deg); }
+  100% { transform: translate(-50%, -50%) scale(0.03) rotate(-16deg); }
+}
+
+@keyframes portal-backdrop-in {
+  to { background-color: #020807; }
+}
+
+@keyframes portal-backdrop-out {
+  to { background-color: rgba(2, 8, 7, 0); }
+}
+
 .section-shell {
   width: min(100%, 1440px);
   margin: 0 auto;
@@ -1090,9 +1198,14 @@ h2 {
 .disc-horses { --record-label: #d8d3ca; }
 .disc-suede { --record-label: #b86751; }
 .disc-pixies { --record-label: #d67043; }
-.disc-nirvana { --record-label: #d6a094; }
+.disc-john-grant { --record-label: #d6b15a; }
 .disc-smiths { --record-label: #718e80; }
 .disc-stone-roses { --record-label: #bd493d; }
+.disc-crimson { --record-label: #c92c24; }
+.disc-mazzy { --record-label: #6c7665; }
+.disc-joy-division { --record-label: #e7e4df; }
+.disc-pupoo { --record-label: #a76e35; }
+.disc-queen { --record-label: #91b8d7; }
 
 .album-cover {
   position: absolute;
@@ -1451,5 +1564,6 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .portal-transition { display: none !important; }
   .reveal { opacity: 1; transform: none; }
 }

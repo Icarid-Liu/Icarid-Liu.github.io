@@ -27,6 +27,13 @@
     />
     <title>Soundness, on Record — Yijian Liu</title>
     <link rel="canonical" href="https://icarid-liu.me/soundness.html" />
+    <script>
+      try {
+        if (window.sessionStorage.getItem('soundness-portal') === '1') {
+          document.documentElement.classList.add('portal-arrival');
+        }
+      } catch {}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://open.spotify.com" />
@@ -39,6 +46,9 @@
   <body class="soundness-page">
     <div class="page-noise" aria-hidden="true"></div>
     <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="portal-transition" data-portal-transition aria-hidden="true">
+      <span class="portal-vortex"></span>
+    </div>
 
     <header class="site-header" id="top">
       <a class="site-mark" href="index.html" aria-label="Yijian Liu academic homepage">
@@ -603,16 +613,16 @@
             <button
               class="album-select"
               type="button"
-              data-spotify-id="7wOOA7l306K8HfBKfPoafr"
-              data-player-title="In Utero — Nirvana"
-              aria-label="Play In Utero by Nirvana here"
+              data-spotify-id="2ioHnKozs8nVYc0sTEWSX2"
+              data-player-title="Queen of Denmark — John Grant"
+              aria-label="Play Queen of Denmark by John Grant here"
               aria-pressed="false"
             >
               <span class="album-object">
-                <span class="vinyl-disc disc-nirvana" aria-hidden="true"></span>
+                <span class="vinyl-disc disc-john-grant" aria-hidden="true"></span>
                 <img
                   class="album-cover"
-                  src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02c4f52ef8782f0e8ede4c1aaf"
+                  src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02b00b3624fa3f08eb3e694f0e"
                   alt=""
                   loading="lazy"
                 />
@@ -620,9 +630,9 @@
               </span>
             </button>
             <div class="album-meta">
-              <p class="album-kicker">Nirvana</p>
-              <h3>In Utero</h3>
-              <a href="https://open.spotify.com/album/7wOOA7l306K8HfBKfPoafr" target="_blank" rel="noreferrer">
+              <p class="album-kicker">John Grant</p>
+              <h3>Queen of Denmark</h3>
+              <a href="https://open.spotify.com/album/2ioHnKozs8nVYc0sTEWSX2" target="_blank" rel="noreferrer">
                 Open in Spotify <span aria-hidden="true">↗</span>
               </a>
             </div>
@@ -681,6 +691,152 @@
               <p class="album-kicker">The Stone Roses</p>
               <h3>Second Coming</h3>
               <a href="https://open.spotify.com/album/3DE7aixVSE6DZ6ALYIztT0" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="75ol9OP8bJaRqzGimpFHDm"
+              data-player-title="In The Court Of The Crimson King — King Crimson"
+              aria-label="Play In The Court Of The Crimson King by King Crimson here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-crimson" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02da7b326bd7ffa7b6b95b0660"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">King Crimson</p>
+              <h3>In The Court Of The Crimson King</h3>
+              <a href="https://open.spotify.com/album/75ol9OP8bJaRqzGimpFHDm" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="4mhpbf7jYc0L1nBceoebIE"
+              data-player-title="Among My Swan — Mazzy Star"
+              aria-label="Play Among My Swan by Mazzy Star here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-mazzy" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0240f8e560e743f9b5d382c0af"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Mazzy Star</p>
+              <h3>Among My Swan</h3>
+              <a href="https://open.spotify.com/album/4mhpbf7jYc0L1nBceoebIE" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="5Dgqy4bBg09Rdw7CQM545s"
+              data-player-title="Unknown Pleasures — Joy Division"
+              aria-label="Play Unknown Pleasures by Joy Division here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-joy-division" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0227cc8b0ed297111f53009772"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Joy Division</p>
+              <h3>Unknown Pleasures</h3>
+              <a href="https://open.spotify.com/album/5Dgqy4bBg09Rdw7CQM545s" target="_blank" rel="noreferrer">
+                Open in Spotify <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-bandcamp-album="1374927286"
+              data-player-url="https://pupooplatter.bandcamp.com/album/a-chilling-winter-night"
+              data-player-title="A Chilling Winter Night — Pu Poo Platter"
+              aria-label="Play A Chilling Winter Night by Pu Poo Platter here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-pupoo" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://f4.bcbits.com/img/a3864734001_5.jpg"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Pu Poo Platter</p>
+              <h3>A Chilling Winter Night</h3>
+              <a href="https://pupooplatter.bandcamp.com/album/a-chilling-winter-night" target="_blank" rel="noreferrer">
+                Open in Bandcamp <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="shelf-album">
+            <button
+              class="album-select"
+              type="button"
+              data-spotify-id="7rFOcbJkcXwqKQIpqcBCQ7"
+              data-player-title="Made In Heaven — Queen"
+              aria-label="Play Made In Heaven by Queen here"
+              aria-pressed="false"
+            >
+              <span class="album-object">
+                <span class="vinyl-disc disc-queen" aria-hidden="true"></span>
+                <img
+                  class="album-cover"
+                  src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0204cc410a00f259d36634b48a"
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="album-action"><span aria-hidden="true">▶</span> Play here</span>
+              </span>
+            </button>
+            <div class="album-meta">
+              <p class="album-kicker">Queen</p>
+              <h3>Made In Heaven</h3>
+              <a href="https://open.spotify.com/album/7rFOcbJkcXwqKQIpqcBCQ7" target="_blank" rel="noreferrer">
                 Open in Spotify <span aria-hidden="true">↗</span>
               </a>
             </div>

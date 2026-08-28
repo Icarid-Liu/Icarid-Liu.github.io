@@ -94,6 +94,9 @@
   <body>
     <div class="page-noise" aria-hidden="true"></div>
     <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="portal-transition" data-portal-transition aria-hidden="true">
+      <span class="portal-vortex"></span>
+    </div>
 
     <header class="site-header" id="top">
       <a class="site-mark" href="#top" aria-label="Yijian Liu home">
@@ -109,7 +112,7 @@
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="#research">Research</a>
         <a href="#work">Selected work</a>
-        <a href="soundness.html">Soundness</a>
+        <a href="soundness.html" data-portal-link>Soundness</a>
         <a class="nav-contact" href="#contact">Email <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
@@ -130,7 +133,7 @@
             <span class="hero-tag-separator" aria-hidden="true">/</span>
             <span class="hero-tag">
               Britpop
-              <a class="hero-tag-link" href="soundness.html" aria-label="Open the Soundness record shelf">
+              <a class="hero-tag-link" href="soundness.html" data-portal-link aria-label="Open the Soundness record shelf">
                 <svg class="hero-tag-icon" viewBox="0 0 16 16" aria-hidden="true">
                   <circle cx="8" cy="8" r="5.25"></circle>
                   <circle class="vinyl-label" cx="8" cy="8" r="1.65"></circle>
