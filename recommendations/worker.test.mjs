@@ -5,6 +5,28 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import { Miniflare } from 'miniflare';
 
+test('the Spotify migration preserves recommendations already on the wall', async () => {
+  const worker = new Miniflare({ modules: true, scriptPath: 'worker.js', compatibilityDate: '2026-07-01', d1Databases: ['DB'] });
+  try {
+    const db = await worker.getD1Database('DB');
+    const migrations = (await readdir('drizzle')).filter((name) => name.endsWith('.sql')).sort();
+    const apply = async (name) => {
+      const sql = await readFile(`drizzle/${name}`, 'utf8');
+      await db.batch(sql.split('--> statement-breakpoint').map((statement) => db.prepare(statement.trim())));
+    };
+    await apply(migrations[0]);
+    await db.prepare('INSERT INTO recommendations (album, artist, created_at, visitor_hash) VALUES (?, ?, ?, ?)')
+      .bind('台风', '野外合作社', 1, 'legacy-test').run();
+    for (const name of migrations.slice(1)) await apply(name);
+    const response = await worker.dispatchFetch('https://recommendations.example/api/recommendations');
+    assert.equal(response.status, 200);
+    const { items } = await response.json();
+    assert.equal(items.length, 1);
+    assert.equal(items[0].album, '台风');
+    assert.equal(items[0].spotifyId, null);
+  } finally { await worker.dispose(); }
+});
+
 test('anonymous recommendations persist, paginate, validate input, and limit repeated posts', async () => {
   const storage = await mkdtemp(join(tmpdir(), 'soundness-test-'));
   const options = {
@@ -36,19 +58,28 @@ test('anonymous recommendations persist, paginate, validate input, and limit rep
 
     const empty = await worker.dispatchFetch(url);
     assert.deepEqual(await empty.json(), { items: [], next: null });
+    const searchUrl = 'https://recommendations.example/api/spotify';
+    const configuration = await worker.dispatchFetch(`${searchUrl}/status`, { headers: { Origin: origin } });
+    assert.equal(configuration.headers.get('Access-Control-Allow-Origin'), origin);
+    assert.deepEqual(await configuration.json(), { enabled: false });
+    assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=a`)).status, 400);
+    assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=王菲`)).status, 503);
+    assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=王菲`, { method: 'POST' })).status, 405);
     assert.equal((await post({ album: '  ', artist: '王菲' })).status, 400);
     assert.equal((await post({ album: '寓言', artist: '王菲', note: 'x'.repeat(501) })).status, 400);
     assert.equal((await post({ album: '寓言', artist: '王菲', note: 'x'.repeat(5000) })).status, 413);
     assert.equal((await post({ album: '寓言', artist: '王菲', website: 'filled' })).status, 400);
+    assert.equal((await post({ album: '寓言', artist: '王菲', spotifyId: 'invalid/id' })).status, 400);
     const foreign = await worker.dispatchFetch(url, { method: 'POST', headers: { Origin: 'https://other.example' }, body: '{}' });
     assert.equal(foreign.status, 403);
 
-    const saved = await post({ album: ' 寓言 ', artist: '王菲', note: '一直在听。', name: '' });
+    const saved = await post({ album: ' 寓言 ', artist: '王菲', note: '一直在听。', name: '', spotifyId: '0123456789ABCDEFGHIJKL' });
     assert.equal(saved.status, 201);
     const { item } = await saved.json();
     assert.equal(item.album, '寓言');
     assert.equal(item.note, '一直在听。');
     assert.equal(item.name, '');
+    assert.equal(item.spotifyId, '0123456789ABCDEFGHIJKL');
     assert.ok(Number.isInteger(item.id));
     assert.equal('visitor_hash' in item, false);
     const limited = await post({ album: '台风', artist: '野外合作社' });
@@ -66,6 +97,7 @@ test('anonymous recommendations persist, paginate, validate input, and limit rep
     ).bind(`Test record ${index}`, 'Test artist', '', '', Date.now(), `test-${index}`)));
     const pageOne = await (await worker.dispatchFetch(url)).json();
     assert.equal(pageOne.items.length, 12);
+    assert.equal(pageOne.items[0].spotifyId, null);
     assert.equal(pageOne.next, pageOne.items.at(-1).id);
     const pageTwo = await (await worker.dispatchFetch(`${url}?before=${pageOne.next}`)).json();
     assert.equal(pageTwo.items.length, 3);

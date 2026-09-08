@@ -1348,6 +1348,20 @@ h2 {
 .visitor-record-artist { margin: 0.25rem 0 0; color: var(--acid); font-size: 0.875rem; }
 .visitor-record-note { margin: 0.8rem 0; color: var(--paper-deep); white-space: pre-wrap; font-size: 0.95rem; }
 .visitor-record-credit { margin: 0.7rem 0 0; color: rgba(242, 238, 231, 0.5); font-size: 0.75rem; }
+.album-search { position: relative; padding-bottom: 1rem; border-bottom: 1px solid rgba(242, 238, 231, 0.16); }
+.album-search-help { margin: 0.6rem 0 0; color: var(--paper-deep); font-size: 0.75rem; }
+.album-search-selection,
+.visitor-record-spotify { display: inline-block; margin-top: 0.5rem; color: var(--acid); font-size: 0.8rem; overflow-wrap: anywhere; }
+.album-search-results { max-height: 22rem; margin: 0.6rem 0 0; padding: 0; overflow-y: auto; overscroll-behavior: contain; list-style: none; border: 1px solid rgba(242, 238, 231, 0.25); }
+.album-search-results li { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem; cursor: pointer; }
+.album-search-results li + li { border-top: 1px solid rgba(242, 238, 231, 0.12); }
+.album-search-results li:hover,
+.album-search-results li[aria-selected="true"] { background: rgba(215, 255, 82, 0.12); }
+.album-search-results img { flex: 0 0 48px; object-fit: contain; }
+.album-search-results span { min-width: 0; overflow-wrap: anywhere; }
+.album-search-results strong { display: block; font-size: 0.9rem; font-weight: 500; }
+.album-search-results small { display: block; margin-top: 0.2rem; color: var(--paper-deep); font-size: 0.75rem; }
+.album-search[hidden], .album-search-results[hidden], .album-search-selection[hidden] { display: none; }
 @media (max-width: 760px) {
   .recommendations-heading { align-items: start; flex-direction: column; }
   .recommendations-layout { grid-template-columns: 1fr; }

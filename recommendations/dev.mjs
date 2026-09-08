@@ -1,6 +1,8 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { Miniflare } from 'miniflare';
 
+try { process.loadEnvFile('.env.local'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+
 const worker = new Miniflare({
   modules: true,
   scriptPath: 'worker.js',
@@ -8,7 +10,10 @@ const worker = new Miniflare({
   port: 8787,
   d1Databases: ['DB'],
   d1Persist: '.dev-data',
-  bindings: { RATE_LIMIT_SECRET: 'local-development-only', ALLOW_LOCAL_ORIGINS: 'true' },
+  bindings: {
+    RATE_LIMIT_SECRET: 'local-development-only', ALLOW_LOCAL_ORIGINS: 'true',
+    ...Object.fromEntries(['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET', 'SPOTIFY_MARKET'].filter((key) => process.env[key]).map((key) => [key, process.env[key]])),
+  },
 });
 const db = await worker.getD1Database('DB');
 await db.prepare('CREATE TABLE IF NOT EXISTS local_migrations (name TEXT PRIMARY KEY)').run();

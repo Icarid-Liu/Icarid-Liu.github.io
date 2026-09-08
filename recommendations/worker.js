@@ -1,9 +1,12 @@
+import { createSpotifySearch, spotifyConfigured } from './spotify.mjs';
+
+const searchSpotify = createSpotifySearch();
 const origins = new Set([
   'https://icarid-liu.me', 'https://www.icarid-liu.me',
   'http://icarid-liu.me', 'http://www.icarid-liu.me',
   'https://icarid-liu.github.io',
 ]);
-const columns = 'id, album, artist, note, name, created_at AS createdAt';
+const columns = 'id, album, artist, note, name, spotify_id AS spotifyId, created_at AS createdAt';
 const pageSize = 12;
 
 function database(env) {
@@ -72,7 +75,7 @@ export default {
     if (url.pathname === '/' && request.method === 'GET') {
       return Response.redirect('https://icarid-liu.me/soundness.html#recommendations', 302);
     }
-    if (url.pathname !== '/api/recommendations') return reply({ error: 'Not found.' }, 404);
+    if (!['/api/recommendations', '/api/spotify/search', '/api/spotify/status'].includes(url.pathname)) return reply({ error: 'Not found.' }, 404);
     if (origin && !isAllowed) return reply({ error: 'Please use the Soundness page to share a record.' }, 403);
     if (request.method === 'OPTIONS') {
       if (!isAllowed) return reply({ error: 'Origin not allowed.' }, 403);
@@ -82,6 +85,18 @@ export default {
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Max-Age': '600',
       } });
+    }
+
+    if (url.pathname.startsWith('/api/spotify/')) {
+      if (request.method !== 'GET') return reply({ error: 'Method not allowed.' }, 405, { Allow: 'GET, OPTIONS' });
+      if (url.pathname === '/api/spotify/status') return reply({ enabled: spotifyConfigured(env) });
+      const query = (url.searchParams.get('q') || '').trim();
+      if (query.length < 2 || query.length > 160) return reply({ error: 'Please enter 2–160 characters to search.' }, 400);
+      try {
+        return reply({ items: await searchSpotify(query, env) });
+      } catch (error) {
+        return reply({ error: error.status ? error.message : 'Could not reach Spotify. Please try again or enter the record manually.' }, error.status || 503);
+      }
     }
 
     try {
@@ -110,7 +125,9 @@ export default {
         const body = JSON.parse(text);
         if (!body || typeof body !== 'object' || Array.isArray(body)) throw new Error('Please check your recommendation.');
         if (body.website) throw new Error('Please leave the website field empty.');
-        record = { album: field(body, 'album', 120, true), artist: field(body, 'artist', 120, true), note: field(body, 'note', 500), name: field(body, 'name', 60) };
+        const spotifyId = field(body, 'spotifyId', 22);
+        if (spotifyId && !/^[A-Za-z0-9]{22}$/.test(spotifyId)) throw new Error('Please choose the album again, or enter it manually.');
+        record = { album: field(body, 'album', 120, true), artist: field(body, 'artist', 120, true), note: field(body, 'note', 500), name: field(body, 'name', 60), spotifyId: spotifyId || null };
       } catch (error) {
         return reply({ error: error instanceof SyntaxError ? 'Please check your recommendation.' : error.message }, error instanceof RangeError ? 413 : 400);
       }
@@ -119,11 +136,11 @@ export default {
       const hash = await visitorHash(request, env.RATE_LIMIT_SECRET, now);
       // The conditional insert makes the one-minute cooldown atomic, even for simultaneous requests.
       const item = await db.prepare(`
-        INSERT INTO recommendations (album, artist, note, name, created_at, visitor_hash)
-        SELECT ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (
+        INSERT INTO recommendations (album, artist, note, name, spotify_id, created_at, visitor_hash)
+        SELECT ?, ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (
           SELECT 1 FROM recommendations WHERE visitor_hash = ? AND created_at > ?
         ) RETURNING ${columns}
-      `).bind(record.album, record.artist, record.note, record.name, now, hash, hash, now - 60000).first();
+      `).bind(record.album, record.artist, record.note, record.name, record.spotifyId, now, hash, hash, now - 60000).first();
       if (!item) return reply({ error: 'Give the last record a moment to spin. Please wait a minute before posting again.' }, 429, { 'Retry-After': '60' });
       return reply({ item }, 201);
     } catch {

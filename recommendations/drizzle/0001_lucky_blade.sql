@@ -1,0 +1,1 @@
+ALTER TABLE `recommendations` ADD `spotify_id` text;

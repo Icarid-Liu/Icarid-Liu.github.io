@@ -6,7 +6,7 @@
     "build": "node build.mjs",
     "dev": "node dev.mjs",
     "db:generate": "drizzle-kit generate",
-    "test": "node --test worker.test.mjs"
+    "test": "node --test *.test.mjs"
   },
   "devDependencies": {
     "drizzle-kit": "0.31.10",
