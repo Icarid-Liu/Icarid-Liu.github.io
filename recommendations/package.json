@@ -1,0 +1,16 @@
+{
+  "name": "soundness-recommendations",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node dev.mjs",
+    "db:generate": "drizzle-kit generate",
+    "test": "node --test worker.test.mjs"
+  },
+  "devDependencies": {
+    "drizzle-kit": "0.31.10",
+    "drizzle-orm": "0.45.2",
+    "miniflare": "^4"
+  }
+}

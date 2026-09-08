@@ -1146,6 +1146,11 @@ h2 {
 .disc-joy-division { --record-label: #e7e4df; }
 .disc-pupoo { --record-label: #a76e35; }
 .disc-queen { --record-label: #91b8d7; }
+.disc-typhoon { --record-label: #567187; }
+.disc-cable-temple { --record-label: #a6a198; }
+.disc-queens-road { --record-label: #af352c; }
+.disc-fable { --record-label: #bac6a3; }
+.disc-favorite { --record-label: var(--acid); }
 
 .album-cover {
   position: absolute;
@@ -1241,6 +1246,112 @@ h2 {
 .album-meta a:hover {
   border-color: var(--acid);
   color: var(--acid);
+}
+
+.recommendation-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(0.7rem, 1.2vw, 1.15rem);
+  border: 1px solid rgba(215, 255, 82, 0.45);
+  background: #232d2b;
+  color: var(--acid);
+}
+
+.recommendation-edition {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.recommendation-question {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.1vw, 2.1rem);
+  line-height: 1.02;
+}
+
+.recommendation-plus { align-self: flex-end; font-size: 1.5rem; line-height: 1; }
+
+.recommendations {
+  margin-top: clamp(3rem, 6vw, 6rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  border-top: 1px solid rgba(242, 238, 231, 0.2);
+  scroll-margin-top: 6rem;
+}
+
+.recommendations-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.recommendations-heading h2 {
+  margin: 0.7rem 0 0;
+  font-family: var(--serif);
+  font-size: clamp(2.1rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.recommendations-heading h2 em { color: var(--acid); }
+.recommendations-heading > p { max-width: 18rem; margin: 0; color: var(--paper-deep); font-size: 0.875rem; }
+.recommendations-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(2rem, 5vw, 5rem); }
+.recommendation-form { position: relative; display: grid; align-content: start; gap: 1rem; }
+.recommendation-form label { display: grid; gap: 0.4rem; font-size: 0.875rem; }
+.field-optional { display: inline; color: rgba(242, 238, 231, 0.5); font-size: 0.75rem; }
+.recommendation-form input,
+.recommendation-form textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(242, 238, 231, 0.25);
+  border-radius: 0;
+  background: rgba(16, 20, 37, 0.55);
+  color: var(--paper);
+  font: inherit;
+  font-size: 1rem;
+}
+.recommendation-form textarea { resize: vertical; }
+.recommendation-form input::placeholder,
+.recommendation-form textarea::placeholder { color: rgba(242, 238, 231, 0.42); }
+.recommendation-form input:focus-visible,
+.recommendation-form textarea:focus-visible,
+.recommendations button:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; }
+.recommendation-submit {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--acid);
+  background: var(--acid);
+  color: var(--ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.recommendations button:disabled { opacity: 0.55; cursor: wait; }
+.recommendation-status,
+.recommendation-list-status { min-height: 1.4em; margin: 0; color: var(--paper-deep); font-size: 0.875rem; }
+.recommendation-status[data-state="error"] { color: var(--pink); }
+.recommendation-status[data-state="success"] { color: var(--acid); }
+.recommendation-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.visitor-records { min-width: 0; }
+.visitor-records-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 1rem; }
+.visitor-records-heading h3 { margin: 0; font-size: 1rem; font-weight: 500; }
+.recommendation-refresh,
+.recommendation-more { padding: 0.4rem 0; border: 0; border-bottom: 1px solid rgba(215, 255, 82, 0.4); background: none; color: var(--acid); font-size: 0.875rem; cursor: pointer; }
+.recommendation-more { margin-top: 1rem; }
+.visitor-record { padding: 1.2rem 0; border-bottom: 1px solid rgba(242, 238, 231, 0.16); overflow-wrap: anywhere; }
+.visitor-record h4 { margin: 0; font-size: 1.1rem; font-weight: 500; }
+.visitor-record-artist { margin: 0.25rem 0 0; color: var(--acid); font-size: 0.875rem; }
+.visitor-record-note { margin: 0.8rem 0; color: var(--paper-deep); white-space: pre-wrap; font-size: 0.95rem; }
+.visitor-record-credit { margin: 0.7rem 0 0; color: rgba(242, 238, 231, 0.5); font-size: 0.75rem; }
+@media (max-width: 760px) {
+  .recommendations-heading { align-items: start; flex-direction: column; }
+  .recommendations-layout { grid-template-columns: 1fr; }
+  .recommendation-question { font-size: 1.7rem; }
 }
 
 .contact {
