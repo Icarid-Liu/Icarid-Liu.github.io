@@ -59,13 +59,9 @@ test('anonymous recommendations persist, paginate, validate input, and limit rep
 
     const empty = await worker.dispatchFetch(url);
     assert.deepEqual(await empty.json(), { items: [], next: null });
-    const searchUrl = 'https://recommendations.example/api/albums';
     const configuration = await worker.dispatchFetch('https://recommendations.example/api/spotify/status', { headers: { Origin: origin } });
     assert.equal(configuration.headers.get('Access-Control-Allow-Origin'), origin);
     assert.deepEqual(await configuration.json(), { enabled: false });
-    assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=a`)).status, 400);
-    assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=王菲`, { headers: { Origin: 'https://other.example' } })).status, 403);
-    assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=王菲`, { method: 'POST' })).status, 405);
     assert.equal((await post({ album: '  ', artist: '王菲' })).status, 400);
     assert.equal((await post({ album: '寓言', artist: '王菲', note: 'x'.repeat(501) })).status, 400);
     assert.equal((await post({ album: '寓言', artist: '王菲', note: 'x'.repeat(5000) })).status, 413);

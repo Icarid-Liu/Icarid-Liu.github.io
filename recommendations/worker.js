@@ -1,6 +1,3 @@
-import { createAlbumSearch } from './catalog.mjs';
-
-const searchAlbums = createAlbumSearch();
 const origins = new Set([
   'https://icarid-liu.me', 'https://www.icarid-liu.me',
   'http://icarid-liu.me', 'http://www.icarid-liu.me',
@@ -75,7 +72,7 @@ export default {
     if (url.pathname === '/' && request.method === 'GET') {
       return Response.redirect('https://icarid-liu.me/soundness.html#recommendations', 302);
     }
-    if (!['/api/recommendations', '/api/albums/search', '/api/spotify/status'].includes(url.pathname)) return reply({ error: 'Not found.' }, 404);
+    if (!['/api/recommendations', '/api/spotify/status'].includes(url.pathname)) return reply({ error: 'Not found.' }, 404);
     if (origin && !isAllowed) return reply({ error: 'Please use the Soundness page to share a record.' }, 403);
     if (request.method === 'OPTIONS') {
       if (!isAllowed) return reply({ error: 'Origin not allowed.' }, 403);
@@ -89,17 +86,6 @@ export default {
 
     // Old cached clients should keep their manual form while loading the update.
     if (url.pathname === '/api/spotify/status') return reply({ enabled: false });
-    if (url.pathname === '/api/albums/search') {
-      if (request.method !== 'GET') return reply({ error: 'Method not allowed.' }, 405, { Allow: 'GET, OPTIONS' });
-      const query = (url.searchParams.get('q') || '').trim();
-      if (query.length < 2 || query.length > 160) return reply({ error: 'Please enter 2–160 characters to search.' }, 400);
-      try {
-        return reply({ items: await searchAlbums(query), provider: 'iTunes' });
-      } catch (error) {
-        return reply({ error: error.status ? error.message : 'Could not reach the album catalog. Please try again or enter the record below.' }, error.status || 503);
-      }
-    }
-
     try {
       const db = database(env);
       if (request.method === 'GET') {

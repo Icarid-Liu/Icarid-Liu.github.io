@@ -26,11 +26,11 @@ The API's Sites project is recorded in `recommendations/.openai/hosting.json`. S
 
 ### Free album autocomplete
 
-The form searches the public **iTunes Search API** by artist and partial album title. No music account, API key, Premium subscription, or developer app is required. Selected records fill the album and artist fields and retain an optional Apple Music album ID. Public recommendations link to that album and can also open a Spotify search; existing Spotify album links remain supported. Catalog results show text metadata (album, artist, year).
+The browser queries the public **iTunes Search API** directly (the endpoint permits cross-origin GET requests) by artist and partial album title. No music account, API key, Premium subscription, or developer app is required. Selected records fill the album and artist fields and retain an optional Apple Music album ID. Public recommendations link to that album and can also open a Spotify search; existing Spotify album links remain supported. Catalog results show text metadata (album, artist, year).
 
 Search uses the Hong Kong storefront. Coverage and spelling depend on that catalog, so manual entry is always available. Combined queries that miss a short title (such as `王菲 寓`) fall back to an artist search and filter its returned titles. Cached artist results also support refining an album title without another catalog request.
 
-The frontend waits for a pause in typing and spaces requests by at least 3.2 seconds. The service coalesces identical requests, caches up to 100 queries for ten minutes, budgets at most 18 upstream calls per rolling minute per Worker isolate, and respects upstream `Retry-After`. This is a small personal-site integration, not a guarantee of unrestricted catalog capacity across all edge instances. The manual form still works during search outages or quota exhaustion.
+The frontend waits for a pause in typing and spaces requests by at least 3.2 seconds. Each page coalesces identical requests, caches up to 100 queries for ten minutes, budgets at most 18 upstream calls per rolling minute, and respects upstream `Retry-After`. Direct browser queries avoid sharing the hosting service’s outbound catalog quota. Provider limits and shared visitor IP addresses can still affect availability. The manual form still works during search outages or quota exhaustion.
 
 Run `npm test` inside `recommendations/` for catalog normalization, partial-title fallback, caching, failure handling, and database migration/persistence checks. Publish the API and GitHub Pages frontend separately. No music secrets need configuring.
 

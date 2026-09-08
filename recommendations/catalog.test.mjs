@@ -49,6 +49,17 @@ test('cached artist albums match multiword English titles and duplicate in-fligh
   assert.equal(calls, 1);
 });
 
+test('multiword artist names still work and unrelated fuzzy results do not become title matches', async () => {
+  const search = createAlbumSearch(async (input) => {
+    const term = new URL(input).searchParams.get('term');
+    if (term === 'Pink Floyd') return json({ results: [{ ...album, artistName: 'Pink Floyd', collectionName: 'The Dark Side of the Moon' }] });
+    if (term === '罗大佑') return json({ results: [{ ...album, artistName: '羅大佑', collectionName: '之乎者也' }] });
+    return json({ results: [{ ...album, artistName: 'Unrelated artist', collectionName: 'Unrelated recording' }] });
+  });
+  assert.equal((await search('Pink Floyd'))[0].album, 'The Dark Side of the Moon');
+  assert.deepEqual(await search('罗大佑 皇后'), []);
+});
+
 test('cached results expire and the rolling upstream budget recovers', async () => {
   let time = 1000000;
   let calls = 0;

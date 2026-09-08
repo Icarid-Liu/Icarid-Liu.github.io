@@ -65,6 +65,8 @@ export function createAlbumSearch(fetcher = fetch, now = Date.now) {
     }
     const items = await lookup(query);
     if (words.length < 2) return items.slice(0, 8);
+    const artistMatches = items.filter((item) => normalized(item.artist).includes(key));
+    if (artistMatches.length) return artistMatches.slice(0, 8);
     const titlePart = words.at(-1);
     const matching = items.filter((item) => normalized(item.album).includes(titlePart));
     if (matching.length) return matching.slice(0, 8);
@@ -72,6 +74,6 @@ export function createAlbumSearch(fetcher = fetch, now = Date.now) {
     // artist returns 寓言. Broaden once, then filter the returned album titles.
     const artistAlbums = await lookup(words.slice(0, -1).join(' '));
     const refined = artistAlbums.filter((item) => normalized(item.album).includes(titlePart));
-    return (refined.length ? refined : items).slice(0, 8);
+    return refined.slice(0, 8);
   };
 }

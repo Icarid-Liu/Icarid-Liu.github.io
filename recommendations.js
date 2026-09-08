@@ -1,3 +1,5 @@
+import { createAlbumSearch } from './recommendations/catalog.mjs?v=20260908-direct';
+
 (() => {
   const section = document.querySelector('[data-recommendations-api]');
   if (!section) return;
@@ -50,7 +52,7 @@
   const selection = searchBox.querySelector('[data-album-selection]');
   const searchHint = searchHelp.textContent;
   let searchTimer;
-  let searchController;
+  const searchAlbums = createAlbumSearch((url, options) => fetch(url, { ...options, credentials: 'omit' }));
   let searchVersion = 0;
   let composing = false;
   let albums = [];
@@ -60,7 +62,6 @@
   const dismissSearch = () => {
     ++searchVersion;
     window.clearTimeout(searchTimer);
-    searchController?.abort();
     suggestions.hidden = true;
     suggestions.replaceChildren();
     searchInput.setAttribute('aria-expanded', 'false');
@@ -108,11 +109,8 @@
     searchInput.setAttribute('aria-busy', 'true');
     searchTimer = window.setTimeout(async () => {
       lastSearchAt = Date.now();
-      searchController = new AbortController();
       try {
-        const url = new URL('/api/albums/search', api);
-        url.searchParams.set('q', query);
-        const data = await request(url, { signal: searchController.signal });
+        const data = { items: await searchAlbums(query) };
         if (version !== searchVersion) return;
         if (!Array.isArray(data.items)) throw new Error('Could not read album results. You can enter the record below.');
         albums = data.items.filter((item) => item && /^[1-9]\d{0,15}$/.test(item.id)
@@ -139,7 +137,7 @@
           ? `${albums.length} albums from iTunes. Choose one, or use ↑ ↓ and Enter.`
           : 'No albums found. Try another spelling, or enter the record below.';
       } catch (error) {
-        if (version === searchVersion) searchHelp.textContent = `${error.message} You can fill in the fields below.`;
+        if (version === searchVersion) searchHelp.textContent = error.status ? error.message : 'Could not reach the album catalog. You can fill in the fields below.';
       } finally {
         if (version === searchVersion) searchInput.removeAttribute('aria-busy');
       }
