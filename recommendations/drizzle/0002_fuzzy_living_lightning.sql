@@ -1,0 +1,1 @@
+ALTER TABLE `recommendations` ADD `apple_music_id` text;

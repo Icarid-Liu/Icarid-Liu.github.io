@@ -7,6 +7,7 @@ export const recommendations = sqliteTable('recommendations', {
   note: text('note').notNull().default(''),
   name: text('name').notNull().default(''),
   spotifyId: text('spotify_id'),
+  appleMusicId: text('apple_music_id'),
   createdAt: integer('created_at').notNull(),
   visitorHash: text('visitor_hash').notNull(),
 }, (table) => [index('idx_recommendations_visitor_time').on(table.visitorHash, table.createdAt)]);

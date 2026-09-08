@@ -12,7 +12,6 @@ const worker = new Miniflare({
   d1Persist: '.dev-data',
   bindings: {
     RATE_LIMIT_SECRET: 'local-development-only', ALLOW_LOCAL_ORIGINS: 'true',
-    ...Object.fromEntries(['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET', 'SPOTIFY_MARKET'].filter((key) => process.env[key]).map((key) => [key, process.env[key]])),
   },
 });
 const db = await worker.getD1Database('DB');

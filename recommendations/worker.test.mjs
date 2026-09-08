@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import { Miniflare } from 'miniflare';
 
-test('the Spotify migration preserves recommendations already on the wall', async () => {
+test('catalog migrations preserve recommendations already on the wall', async () => {
   const worker = new Miniflare({ modules: true, scriptPath: 'worker.js', compatibilityDate: '2026-07-01', d1Databases: ['DB'] });
   try {
     const db = await worker.getD1Database('DB');
@@ -24,6 +24,7 @@ test('the Spotify migration preserves recommendations already on the wall', asyn
     assert.equal(items.length, 1);
     assert.equal(items[0].album, '台风');
     assert.equal(items[0].spotifyId, null);
+    assert.equal(items[0].appleMusicId, null);
   } finally { await worker.dispose(); }
 });
 
@@ -58,28 +59,31 @@ test('anonymous recommendations persist, paginate, validate input, and limit rep
 
     const empty = await worker.dispatchFetch(url);
     assert.deepEqual(await empty.json(), { items: [], next: null });
-    const searchUrl = 'https://recommendations.example/api/spotify';
-    const configuration = await worker.dispatchFetch(`${searchUrl}/status`, { headers: { Origin: origin } });
+    const searchUrl = 'https://recommendations.example/api/albums';
+    const configuration = await worker.dispatchFetch('https://recommendations.example/api/spotify/status', { headers: { Origin: origin } });
     assert.equal(configuration.headers.get('Access-Control-Allow-Origin'), origin);
     assert.deepEqual(await configuration.json(), { enabled: false });
     assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=a`)).status, 400);
-    assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=王菲`)).status, 503);
+    assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=王菲`, { headers: { Origin: 'https://other.example' } })).status, 403);
     assert.equal((await worker.dispatchFetch(`${searchUrl}/search?q=王菲`, { method: 'POST' })).status, 405);
     assert.equal((await post({ album: '  ', artist: '王菲' })).status, 400);
     assert.equal((await post({ album: '寓言', artist: '王菲', note: 'x'.repeat(501) })).status, 400);
     assert.equal((await post({ album: '寓言', artist: '王菲', note: 'x'.repeat(5000) })).status, 413);
     assert.equal((await post({ album: '寓言', artist: '王菲', website: 'filled' })).status, 400);
     assert.equal((await post({ album: '寓言', artist: '王菲', spotifyId: 'invalid/id' })).status, 400);
+    assert.equal((await post({ album: '寓言', artist: '王菲', appleMusicId: 'invalid/id' })).status, 400);
+    assert.equal((await post({ album: '寓言', artist: '王菲', appleMusicId: '9007199254740992' })).status, 400);
     const foreign = await worker.dispatchFetch(url, { method: 'POST', headers: { Origin: 'https://other.example' }, body: '{}' });
     assert.equal(foreign.status, 403);
 
-    const saved = await post({ album: ' 寓言 ', artist: '王菲', note: '一直在听。', name: '', spotifyId: '0123456789ABCDEFGHIJKL' });
+    const saved = await post({ album: ' 寓言 ', artist: '王菲', note: '一直在听。', name: '', appleMusicId: '123456789' });
     assert.equal(saved.status, 201);
     const { item } = await saved.json();
     assert.equal(item.album, '寓言');
     assert.equal(item.note, '一直在听。');
     assert.equal(item.name, '');
-    assert.equal(item.spotifyId, '0123456789ABCDEFGHIJKL');
+    assert.equal(item.spotifyId, null);
+    assert.equal(item.appleMusicId, '123456789');
     assert.ok(Number.isInteger(item.id));
     assert.equal('visitor_hash' in item, false);
     const limited = await post({ album: '台风', artist: '野外合作社' });
@@ -98,6 +102,7 @@ test('anonymous recommendations persist, paginate, validate input, and limit rep
     const pageOne = await (await worker.dispatchFetch(url)).json();
     assert.equal(pageOne.items.length, 12);
     assert.equal(pageOne.items[0].spotifyId, null);
+    assert.equal(pageOne.items[0].appleMusicId, null);
     assert.equal(pageOne.next, pageOne.items.at(-1).id);
     const pageTwo = await (await worker.dispatchFetch(`${url}?before=${pageOne.next}`)).json();
     assert.equal(pageTwo.items.length, 3);
